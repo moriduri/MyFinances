@@ -15,11 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     Transaction.cpp \
-    TransactionDialog.cpp
+    TransactionDialog.cpp \
+    Category.cpp
 
 HEADERS  += mainwindow.h \
     Transaction.h \
-    TransactionDialog.h
+    TransactionDialog.h \
+    Category.h
 
 FORMS    += mainwindow.ui \
     TransactionDialog.ui
