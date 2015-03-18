@@ -8,9 +8,10 @@ class Transaction : public QObject
 {
     Q_OBJECT
 private:
-    QString description;
-    int sum;
-    QDate date;
+    QString m_description;
+    //  Category category;
+    int m_sum;
+    QDate m_date;
 public:
     Transaction();
     ~Transaction();
