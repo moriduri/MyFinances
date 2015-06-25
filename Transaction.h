@@ -4,12 +4,14 @@
 #include <QObject>
 #include <QDate>
 
+#include "Category.h"
+
 class Transaction : public QObject
 {
     Q_OBJECT
 private:
     QString m_description;
-    //  Category category;
+    Category m_category;
     int m_sum;
     QDate m_date;
 public:

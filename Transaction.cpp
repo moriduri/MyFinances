@@ -1,6 +1,6 @@
 #include "Transaction.h"
 
-Transaction::Transaction()
+Transaction::Transaction() : m_category("")
 {
 }
 

@@ -18,3 +18,7 @@ void MainWindow::on_actionExit_triggered()
 {
     close();
 }
+
+void MainWindow::on_actionAdd_transaction_triggered()
+{
+}
