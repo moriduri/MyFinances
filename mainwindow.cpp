@@ -4,7 +4,8 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    model(nullptr), view(nullptr)
 {
     ui->setupUi(this);
 
@@ -16,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QSqlQuery query(db);
     if (!query.exec("CREATE TABLE IF NOT EXISTS categories ("
                     "id INTEGER PRIMARY KEY,"
-                    "description TEXT"
+                    "name TEXT"
                     ")"))
         qFatal("Cannot create or open a table in the database");
 
@@ -29,6 +30,18 @@ MainWindow::MainWindow(QWidget *parent) :
                     "FOREIGN KEY(category_id) REFERENCES categories(id)"
                     ")"))
         qFatal("Cannot create or open a table in the database: ");
+
+    model = new QSqlRelationalTableModel(this, db);
+    model->setTable("transactions");
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setRelation(1, QSqlRelation("categories", "id", "name"));
+    model->select();
+
+    view = new QTableView(this);
+    view->setModel(model);
+    view->hideColumn(0);
+    view->setItemDelegate(new QSqlRelationalDelegate(view));
+    setCentralWidget(view);
 }
 
 MainWindow::~MainWindow()

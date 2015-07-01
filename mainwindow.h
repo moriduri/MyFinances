@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QtSql>
+#include <QTableView>
 
 namespace Ui {
 class MainWindow;
@@ -25,6 +26,8 @@ private:
     Ui::MainWindow *ui;
 
     QSqlDatabase db;
+    QSqlRelationalTableModel *model;
+    QTableView *view;
 };
 
 #endif // MAINWINDOW_H
