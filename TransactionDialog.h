@@ -15,6 +15,12 @@ public:
     explicit TransactionDialog(QWidget *parent = 0);
     ~TransactionDialog();
 
+signals:
+    void okButtonClickedSignal();
+
+private slots:
+    void okButtonClicked();
+
 private:
     Ui::TransactionDialog *ui;
 };

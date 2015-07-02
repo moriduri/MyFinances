@@ -57,4 +57,12 @@ void MainWindow::on_actionExit_triggered()
 
 void MainWindow::on_actionAdd_transaction_triggered()
 {
+    TransactionDialog *transactionDialog = new TransactionDialog(this);
+    connect(transactionDialog, SIGNAL(okButtonClickedSignal()), this, SLOT(addTransactionToDatabase()));
+    transactionDialog->exec();
+}
+
+void MainWindow::addTransactionToDatabase()
+{
+
 }
