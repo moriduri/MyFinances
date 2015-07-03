@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QtSql>
 #include <QTableView>
+#include <QHeaderView>
 
 namespace Ui {
 class MainWindow;
