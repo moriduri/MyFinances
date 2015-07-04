@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     model(nullptr), view(nullptr)
 {
     ui->setupUi(this);
+    setWindowTitle("MyFinance");
 
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("Finances.sqlite");
@@ -41,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
     view->setModel(model);
     view->hideColumn(0);
     view->setItemDelegate(new QSqlRelationalDelegate(view));
+    view->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     setCentralWidget(view);
 }
 

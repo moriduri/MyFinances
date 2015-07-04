@@ -7,6 +7,7 @@ TransactionDialog::TransactionDialog(QWidget *parent) :
     ui(new Ui::TransactionDialog)
 {
     ui->setupUi(this);
+    setWindowTitle("MyFinance");
     ui->dateEdit->setDate(QDate::currentDate());
     connect(ui->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(okButtonClicked()));
 }
