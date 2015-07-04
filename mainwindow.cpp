@@ -5,10 +5,14 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    model(nullptr), view(nullptr)
+    categoriesModel(nullptr), categoriesView(nullptr),
+    transactionsModel(nullptr), transactionsView(nullptr)
 {
     ui->setupUi(this);
     setWindowTitle("MyFinance");
+
+    centralArea = new QStackedWidget(this);
+    setCentralWidget(centralArea);
 
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("Finances.sqlite");
@@ -32,18 +36,31 @@ MainWindow::MainWindow(QWidget *parent) :
                     ")"))
         qFatal("Cannot create or open a table in the database: ");
 
-    model = new QSqlRelationalTableModel(this, db);
-    model->setTable("transactions");
-    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
-    model->setRelation(1, QSqlRelation("categories", "id", "name"));
-    model->select();
+    categoriesModel = new QSqlTableModel(this, db);
+    categoriesModel->setTable("categories");
+    categoriesModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    categoriesModel->select();
 
-    view = new QTableView(this);
-    view->setModel(model);
-    view->hideColumn(0);
-    view->setItemDelegate(new QSqlRelationalDelegate(view));
-    view->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    setCentralWidget(view);
+    categoriesView = new QTableView(centralArea);
+    categoriesView->setModel(categoriesModel);
+    categoriesView->hideColumn(0);
+    centralArea->addWidget(categoriesView);
+
+    transactionsModel = new QSqlRelationalTableModel(this, db);
+    transactionsModel->setTable("transactions");
+    transactionsModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    transactionsModel->setRelation(1, QSqlRelation("categories", "id", "name"));
+    transactionsModel->select();
+
+    transactionsView = new QTableView(centralArea);
+    transactionsView->setModel(transactionsModel);
+    transactionsView->hideColumn(0);
+    transactionsView->setItemDelegate(new QSqlRelationalDelegate(transactionsView));
+    centralArea->addWidget(transactionsView);
+    centralArea->setCurrentWidget(transactionsView);
+
+    //setCentralWidget(categoriesView);
+    //view->horizontalHeader()->setResizeMode(0, QHeaderView::Stretch); // Not supported by Qt 4.8
 }
 
 MainWindow::~MainWindow()
@@ -57,6 +74,11 @@ void MainWindow::on_actionExit_triggered()
     close();
 }
 
+void MainWindow::on_actionView_transactions_triggered()
+{
+    centralArea->setCurrentWidget(transactionsView);
+}
+
 void MainWindow::on_actionAdd_transaction_triggered()
 {
     TransactionDialog *transactionDialog = new TransactionDialog(this);
@@ -67,4 +89,9 @@ void MainWindow::on_actionAdd_transaction_triggered()
 void MainWindow::addTransactionToDatabase()
 {
 
+}
+
+void MainWindow::on_actionViewCategories_triggered()
+{
+    centralArea->setCurrentWidget(categoriesView);
 }
