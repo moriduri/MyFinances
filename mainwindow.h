@@ -3,8 +3,10 @@
 
 #include <QMainWindow>
 #include <QtSql>
+#include <QStackedWidget>
 #include <QTableView>
 #include <QHeaderView>
+#include <QResizeEvent>
 
 namespace Ui {
 class MainWindow;
@@ -20,15 +22,26 @@ public:
 
 private slots:
     void on_actionExit_triggered();
+
+    void on_actionView_transactions_triggered();
     void on_actionAdd_transaction_triggered();
     void addTransactionToDatabase();
+
+    void on_actionViewCategories_triggered();
+
+protected:
+    virtual void resizeEvent(QResizeEvent *);
 
 private:
     Ui::MainWindow *ui;
 
+    QStackedWidget *centralArea;
+
     QSqlDatabase db;
-    QSqlRelationalTableModel *model;
-    QTableView *view;
+    QSqlTableModel *categoriesModel;
+    QTableView *categoriesView;
+    QSqlRelationalTableModel *transactionsModel;
+    QTableView *transactionsView;
 };
 
 #endif // MAINWINDOW_H

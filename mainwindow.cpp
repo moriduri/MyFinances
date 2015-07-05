@@ -5,11 +5,15 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    model(nullptr), view(nullptr)
+    categoriesModel(nullptr), categoriesView(nullptr),
+    transactionsModel(nullptr), transactionsView(nullptr)
 {
     ui->setupUi(this);
     setWindowTitle("MyFinance");
-    setMinimumSize(500, 400);
+    setMinimumSize(500, 400); //ensures that the header sections are displayed correctly
+
+    centralArea = new QStackedWidget(this);
+    setCentralWidget(centralArea);
 
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("Finances.sqlite");
@@ -33,22 +37,37 @@ MainWindow::MainWindow(QWidget *parent) :
                     ")"))
         qFatal("Cannot create or open a table in the database: ");
 
-    model = new QSqlRelationalTableModel(this, db);
-    model->setTable("transactions");
-    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
-    model->setRelation(1, QSqlRelation("categories", "id", "name"));
-    model->setHeaderData(1, Qt::Horizontal, tr("Category"));
-    model->setHeaderData(2, Qt::Horizontal, tr("Description"));
-    model->setHeaderData(3, Qt::Horizontal, tr("Sum"));
-    model->setHeaderData(4, Qt::Horizontal, tr("Transaction Date"));
-    model->select();
+    categoriesModel = new QSqlTableModel(this, db);
+    categoriesModel->setTable("categories");
+    categoriesModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    categoriesModel->setHeaderData(0, Qt::Horizontal, tr("Name"));
+    categoriesModel->select();
 
-    view = new QTableView(this);
-    view->setModel(model);
-    view->hideColumn(0);
-    view->setItemDelegate(new QSqlRelationalDelegate(view));
-    view->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    setCentralWidget(view);
+    categoriesView = new QTableView(centralArea);
+    categoriesView->setModel(categoriesModel);
+    categoriesView->hideColumn(0);
+    categoriesView->verticalHeader()->hide(); //hides the left vertical header
+    centralArea->addWidget(categoriesView);
+
+    transactionsModel = new QSqlRelationalTableModel(this, db);
+    transactionsModel->setTable("transactions");
+    transactionsModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    transactionsModel->setRelation(1, QSqlRelation("categories", "id", "name"));
+    transactionsModel->setHeaderData(1, Qt::Horizontal, tr("Category")); //formats the sections label
+    transactionsModel->setHeaderData(2, Qt::Horizontal, tr("Description"));
+    transactionsModel->setHeaderData(3, Qt::Horizontal, tr("Sum"));
+    transactionsModel->setHeaderData(4, Qt::Horizontal, tr("Transaction Date"));
+    transactionsModel->select();
+
+    transactionsView = new QTableView(centralArea);
+    transactionsView->setModel(transactionsModel);
+    transactionsView->hideColumn(0);
+    transactionsView->verticalHeader()->hide();
+    transactionsView->setItemDelegate(new QSqlRelationalDelegate(transactionsView));
+    centralArea->addWidget(transactionsView);
+    centralArea->setCurrentWidget(transactionsView);
+
+    //setCentralWidget(categoriesView);
 }
 
 MainWindow::~MainWindow()
@@ -57,9 +76,28 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::resizeEvent(QResizeEvent *event) { //custom resizeEvent handler
+    QTableView *TableView = dynamic_cast<QTableView *>(centralArea->currentWidget()); //TableView points to the current displayed table
+    int columnCount = (TableView->model()->columnCount() - 1);
+    for (int i=1; i<=columnCount; i++) {
+        if (i != columnCount) {
+            TableView->setColumnWidth(i, this->width()/columnCount); //stretchs the sections of the current displayed table (supports Qt v4.8)
+        } else {
+            TableView->setColumnWidth(i, (this->width()/columnCount - 2)); //avoids the appearance of the horizontal scrollbar
+        }
+    }
+    TableView->horizontalHeader()->setMinimumSectionSize(this->width()/columnCount);
+}
+
 void MainWindow::on_actionExit_triggered()
 {
     close();
+}
+
+void MainWindow::on_actionView_transactions_triggered()
+{
+    centralArea->setCurrentWidget(transactionsView);
+    resizeEvent(nullptr); //triggers the resize event
 }
 
 void MainWindow::on_actionAdd_transaction_triggered()
@@ -72,4 +110,10 @@ void MainWindow::on_actionAdd_transaction_triggered()
 void MainWindow::addTransactionToDatabase()
 {
 
+}
+
+void MainWindow::on_actionViewCategories_triggered()
+{
+    centralArea->setCurrentWidget(categoriesView);
+    resizeEvent(nullptr);
 }
