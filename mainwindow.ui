@@ -56,12 +56,21 @@
   </action>
   <action name="actionExit">
    <property name="text">
+    <string>E&amp;xit</string>
+   </property>
+   <property name="toolTip">
     <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
    </property>
   </action>
   <action name="actionAdd_transaction">
    <property name="text">
-    <string>Add transaction</string>
+    <string>&amp;Add transaction</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
    </property>
   </action>
  </widget>

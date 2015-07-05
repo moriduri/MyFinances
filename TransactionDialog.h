@@ -18,7 +18,7 @@ public:
 signals:
     void okButtonClickedSignal();
 
-private slots:
+public slots:
     void okButtonClicked();
 
 private:

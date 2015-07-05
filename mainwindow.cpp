@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("MyFinance");
+    setMinimumSize(500, 400);
 
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("Finances.sqlite");
@@ -36,6 +37,10 @@ MainWindow::MainWindow(QWidget *parent) :
     model->setTable("transactions");
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     model->setRelation(1, QSqlRelation("categories", "id", "name"));
+    model->setHeaderData(1, Qt::Horizontal, tr("Category"));
+    model->setHeaderData(2, Qt::Horizontal, tr("Description"));
+    model->setHeaderData(3, Qt::Horizontal, tr("Sum"));
+    model->setHeaderData(4, Qt::Horizontal, tr("Transaction Date"));
     model->select();
 
     view = new QTableView(this);
