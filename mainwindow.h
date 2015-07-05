@@ -5,8 +5,6 @@
 #include <QtSql>
 #include <QStackedWidget>
 #include <QTableView>
-#include <QHeaderView>
-#include <QResizeEvent>
 
 namespace Ui {
 class MainWindow;
