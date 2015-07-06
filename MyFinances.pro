@@ -18,12 +18,15 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     Transaction.cpp \
     TransactionDialog.cpp \
-    Category.cpp
+    Category.cpp \
+    TransactionsView.cpp
 
 HEADERS  += mainwindow.h \
     Transaction.h \
     TransactionDialog.h \
-    Category.h
+    Category.h \
+    TransactionsView.h
 
 FORMS    += mainwindow.ui \
-    TransactionDialog.ui
+    TransactionDialog.ui \
+    TransactionsView.ui

@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("MyFinance");
-    setMinimumSize(500, 400); //ensures that the header sections are displayed correctly
+    setMinimumSize(600, 400); //ensures that the header sections are displayed correctly
 
     centralArea = new QStackedWidget(this);
     setCentralWidget(centralArea);
@@ -59,15 +59,11 @@ MainWindow::MainWindow(QWidget *parent) :
     transactionsModel->setHeaderData(4, Qt::Horizontal, tr("Transaction Date"));
     transactionsModel->select();
 
-    transactionsView = new QTableView(centralArea);
-    transactionsView->setModel(transactionsModel);
-    transactionsView->hideColumn(0);
-    transactionsView->verticalHeader()->hide();
-    transactionsView->setItemDelegate(new QSqlRelationalDelegate(transactionsView));
+    // This actually will evolve in a much prettier view
+    transactionsView = new TransactionsView(transactionsModel, centralArea);
+    connect(transactionsView->getTransactionDialog(), SIGNAL(okButtonClickedSignal()), this, SLOT(addTransactionToDatabase()));
     centralArea->addWidget(transactionsView);
     centralArea->setCurrentWidget(transactionsView);
-
-    //setCentralWidget(categoriesView);
 }
 
 MainWindow::~MainWindow()
@@ -76,7 +72,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::resizeEvent(QResizeEvent *event) { //custom resizeEvent handler
+/*void MainWindow::resizeEvent(QResizeEvent *event) { //custom resizeEvent handler
     QTableView *TableView = dynamic_cast<QTableView *>(centralArea->currentWidget()); //TableView points to the current displayed table
     int columnCount = (TableView->model()->columnCount() - 1);
     for (int i=1; i<=columnCount; i++) {
@@ -87,7 +83,7 @@ void MainWindow::resizeEvent(QResizeEvent *event) { //custom resizeEvent handler
         }
     }
     TableView->horizontalHeader()->setMinimumSectionSize(this->width()/columnCount);
-}
+}*/
 
 void MainWindow::on_actionExit_triggered()
 {
@@ -100,16 +96,9 @@ void MainWindow::on_actionView_transactions_triggered()
     resizeEvent(nullptr); //triggers the resize event
 }
 
-void MainWindow::on_actionAdd_transaction_triggered()
-{
-    TransactionDialog *transactionDialog = new TransactionDialog(this);
-    connect(transactionDialog, SIGNAL(okButtonClickedSignal()), this, SLOT(addTransactionToDatabase()));
-    transactionDialog->exec();
-}
-
 void MainWindow::addTransactionToDatabase()
 {
-
+    //  TODO: Addition to database (change signal/slot prototype and add to model)
 }
 
 void MainWindow::on_actionViewCategories_triggered()
