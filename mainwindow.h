@@ -5,7 +5,6 @@
 #include <QtSql>
 #include <QStackedWidget>
 #include <QTableView>
-#include <QHeaderView>
 
 namespace Ui {
 class MainWindow;
@@ -27,6 +26,9 @@ private slots:
     void addTransactionToDatabase();
 
     void on_actionViewCategories_triggered();
+
+protected:
+    virtual void resizeEvent(QResizeEvent *);
 
 private:
     Ui::MainWindow *ui;

@@ -20,7 +20,7 @@
      <x>0</x>
      <y>0</y>
      <width>500</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -48,17 +48,29 @@
   </action>
   <action name="actionExit">
    <property name="text">
+    <string>E&amp;xit</string>
+   </property>
+   <property name="toolTip">
     <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
    </property>
   </action>
   <action name="actionView_transactions">
    <property name="text">
-    <string>Transactions</string>
+    <string>&amp;Transactions</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
    </property>
   </action>
   <action name="actionViewCategories">
    <property name="text">
-    <string>Categories</string>
+    <string>&amp;Categories</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
    </property>
   </action>
  </widget>
