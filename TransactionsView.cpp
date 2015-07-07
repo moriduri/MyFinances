@@ -7,12 +7,15 @@ TransactionsView::TransactionsView(QSqlRelationalTableModel *model, QWidget *par
     ui(new Ui::TransactionsView)
 {
     ui->setupUi(this);
+
     ui->tableView->setModel(model);
     ui->tableView->hideColumn(0);
     ui->tableView->verticalHeader()->hide();
     ui->tableView->setItemDelegate(new QSqlRelationalDelegate(ui->tableView));
 
     transactionDialog = new TransactionDialog(this);
+
+    connect(transactionDialog, SIGNAL(acceptedSignal()), this, SLOT(acceptedSlot()));
 }
 
 TransactionsView::~TransactionsView()
@@ -20,12 +23,12 @@ TransactionsView::~TransactionsView()
     delete ui;
 }
 
-const TransactionDialog *TransactionsView::getTransactionDialog() const
-{
-    return transactionDialog;
-}
-
 void TransactionsView::on_buttonAddTransaction_clicked()
 {
     transactionDialog->exec();
+}
+
+void TransactionsView::acceptedSlot()
+{
+    emit acceptedSignal();
 }

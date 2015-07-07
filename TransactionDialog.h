@@ -16,10 +16,10 @@ public:
     ~TransactionDialog();
 
 signals:
-    void okButtonClickedSignal();
+    void acceptedSignal();
 
 private slots:
-    void okButtonClicked();
+    void acceptedSlot();
 
 private:
     Ui::TransactionDialog *ui;
