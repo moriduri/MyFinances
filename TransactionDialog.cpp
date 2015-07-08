@@ -9,7 +9,7 @@ TransactionDialog::TransactionDialog(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle("MyFinance");
     ui->dateEdit->setDate(QDate::currentDate());
-    connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(okButtonClicked())); //clicked OK
+    connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(acceptedSlot())); //clicked OK
     connect(ui->buttonBox, SIGNAL(rejected()), this, SLOT(close())); //clicked CANCEL
 }
 
@@ -18,9 +18,8 @@ TransactionDialog::~TransactionDialog()
     delete ui;
 }
 
-void TransactionDialog::okButtonClicked()
+void TransactionDialog::acceptedSlot()
 {
-    //  TODO: Add signal connection instead of this [MORIDURI: I think that's already a good implementation]
-    emit okButtonClickedSignal();
+    emit acceptedSignal();
     close();
 }

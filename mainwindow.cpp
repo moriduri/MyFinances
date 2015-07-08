@@ -61,7 +61,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // This actually will evolve in a much prettier view
     transactionsView = new TransactionsView(transactionsModel, centralArea);
-    connect(transactionsView->getTransactionDialog(), SIGNAL(okButtonClickedSignal()), this, SLOT(addTransactionToDatabase()));
+    connect(transactionsView, SIGNAL(acceptedSignal()), this, SLOT(addTransactionToDatabase()));
     centralArea->addWidget(transactionsView);
     centralArea->setCurrentWidget(transactionsView);
 }
@@ -93,7 +93,7 @@ void MainWindow::on_actionExit_triggered()
 void MainWindow::on_actionView_transactions_triggered()
 {
     centralArea->setCurrentWidget(transactionsView);
-    resizeEvent(nullptr); //triggers the resize event
+    //resizeEvent(nullptr); //triggers the resize event
 }
 
 void MainWindow::addTransactionToDatabase()
@@ -104,5 +104,5 @@ void MainWindow::addTransactionToDatabase()
 void MainWindow::on_actionViewCategories_triggered()
 {
     centralArea->setCurrentWidget(categoriesView);
-    resizeEvent(nullptr);
+    //resizeEvent(nullptr);
 }

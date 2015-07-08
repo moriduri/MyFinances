@@ -17,10 +17,12 @@ public:
     TransactionsView(QSqlRelationalTableModel *model, QWidget *parent = 0);
     ~TransactionsView();
 
-    const TransactionDialog *getTransactionDialog() const;
+signals:
+    void acceptedSignal();
 
 private slots:
     void on_buttonAddTransaction_clicked();
+    void acceptedSlot();
 
 private:
     Ui::TransactionsView *ui;
