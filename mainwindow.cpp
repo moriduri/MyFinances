@@ -43,10 +43,8 @@ MainWindow::MainWindow(QWidget *parent) :
     categoriesModel->setHeaderData(0, Qt::Horizontal, tr("Name"));
     categoriesModel->select();
 
-    categoriesView = new QTableView(centralArea);
-    categoriesView->setModel(categoriesModel);
-    categoriesView->hideColumn(0);
-    categoriesView->verticalHeader()->hide(); //hides the left vertical header
+    categoriesView = new CategoriesView(categoriesModel, centralArea);
+    connect(categoriesView, SIGNAL(acceptedSignal()), this, SLOT(addCategoryToDatabase()));
     centralArea->addWidget(categoriesView);
 
     transactionsModel = new QSqlRelationalTableModel(this, db);
@@ -96,6 +94,7 @@ void MainWindow::on_actionView_transactions_triggered()
     //resizeEvent(nullptr); //triggers the resize event
 }
 
+
 void MainWindow::addTransactionToDatabase()
 {
     //  TODO: Addition to database (change signal/slot prototype and add to model)
@@ -105,4 +104,9 @@ void MainWindow::on_actionViewCategories_triggered()
 {
     centralArea->setCurrentWidget(categoriesView);
     //resizeEvent(nullptr);
+}
+
+void MainWindow::addCategoryToDatabase()
+{
+
 }

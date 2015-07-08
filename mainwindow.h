@@ -5,6 +5,7 @@
 #include <QtSql>
 #include <QStackedWidget>
 #include <QTableView>
+#include "CategoriesView.h"
 #include "TransactionsView.h"
 
 namespace Ui {
@@ -26,6 +27,7 @@ private slots:
     void addTransactionToDatabase();
 
     void on_actionViewCategories_triggered();
+    void addCategoryToDatabase();
 
 protected:
     //  I don't think we need to care about things like resizing
@@ -39,7 +41,7 @@ private:
 
     QSqlDatabase db;
     QSqlTableModel *categoriesModel;
-    QTableView *categoriesView;
+    CategoriesView *categoriesView;
     QSqlRelationalTableModel *transactionsModel;
     TransactionsView *transactionsView;
 };
