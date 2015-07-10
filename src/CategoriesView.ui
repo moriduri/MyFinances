@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TransactionsView</class>
- <widget class="QWidget" name="TransactionsView">
+ <class>CategoriesView</class>
+ <widget class="QWidget" name="CategoriesView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,30 +17,30 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <property name="spacing">
-      <number>10</number>
+      <number>9</number>
      </property>
      <property name="sizeConstraint">
       <enum>QLayout::SetDefaultConstraint</enum>
      </property>
      <property name="leftMargin">
-      <number>5</number>
+      <number>0</number>
      </property>
      <property name="rightMargin">
-      <number>5</number>
+      <number>0</number>
      </property>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QPushButton" name="buttonAddTransaction">
+        <widget class="QPushButton" name="buttonAddCategory">
          <property name="text">
-          <string>Add Transaction</string>
+          <string>Add Category</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="buttonDeleteTransaction">
+        <widget class="QPushButton" name="buttonDeleteCategory">
          <property name="text">
-          <string>Delete Transaction</string>
+          <string>Delete Category</string>
          </property>
         </widget>
        </item>

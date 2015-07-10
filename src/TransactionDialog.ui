@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>280</width>
-    <height>175</height>
+    <height>181</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -24,6 +24,13 @@
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Category</string>
+         </property>
+        </widget>
+       </item>
        <item>
         <widget class="QLabel" name="label">
          <property name="minimumSize">
@@ -55,6 +62,9 @@
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QComboBox" name="comboBox"/>
+       </item>
        <item>
         <widget class="QLineEdit" name="lineEdit"/>
        </item>
