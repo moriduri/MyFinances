@@ -1,5 +1,13 @@
 #include "AddDialog.h"
 #include "ui_Dialog.h"
+#include <QSpacerItem>
+#include <QDialogButtonBox>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QComboBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QDateEdit>
 
 AddDialog::AddDialog(QWidget *parent) :
     QDialog(parent),
@@ -7,8 +15,6 @@ AddDialog::AddDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("MyFinance");
-
-    //connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(acceptedSlot()));
 }
 
 AddDialog::~AddDialog()
@@ -16,8 +22,8 @@ AddDialog::~AddDialog()
     delete ui;
 }
 
-/*void AddDialog::acceptedSlot()
+void AddDialog::acceptedSlot()
 {
     emit acceptedSignal();
     close();
-}*/
+}
