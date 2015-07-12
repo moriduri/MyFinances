@@ -27,7 +27,7 @@ private slots:
     void addTransactionToDatabase();
 
     void on_actionViewCategories_triggered();
-    void addCategoryToDatabase();
+    void addCategoryToDatabase(QString name);
 
 protected:
     //  I don't think we need to care about things like resizing

@@ -18,15 +18,15 @@ public:
     ~CategoriesView();
 
 signals:
-    void acceptedSignal();
+    void acceptedSignal(QString);
 
 private slots:
     void on_buttonAddCategory_clicked();
 
-    void acceptedSlot();
+    void acceptedSlot(QString);
 private:
     Ui::CategoriesView *ui;
-    AddCategoryDialog *categoryDialog;
+    AddCategoryDialog *dialog;
 };
 
 #endif // CATEGORIESVIEW_H

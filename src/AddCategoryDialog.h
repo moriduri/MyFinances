@@ -1,28 +1,24 @@
 #ifndef ADDCATEGORYDIALOG_H
 #define ADDCATEGORYDIALOG_H
 
-#include <QDialog>
+#include "AddDialog.h"
+#include <QLineEdit>
 
-namespace Ui {
-class AddCategoryDialog;
-}
-
-class AddCategoryDialog : public QDialog
+class AddCategoryDialog : public AddDialog
 {
     Q_OBJECT
-
 public:
     explicit AddCategoryDialog(QWidget *parent = 0);
     ~AddCategoryDialog();
 
 signals:
-    void acceptedSignal();
+    acceptedSignal(QString);
 
 private slots:
-    void acceptedSlot();
+    void accepted();
 
 private:
-    Ui::AddCategoryDialog *ui;
+    QLineEdit *nameLineEdit;
 };
 
 #endif // ADDCATEGORYDIALOG_H

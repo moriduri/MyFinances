@@ -3,10 +3,10 @@
 
 #include <QWidget>
 #include <QtSql>
-#include "TransactionDialog.h"
+#include "AddTransactionDialog.h"
 
 namespace Ui {
-class TransactionsView;
+    class TransactionsView;
 }
 
 class TransactionsView : public QWidget
@@ -26,7 +26,7 @@ private slots:
 
 private:
     Ui::TransactionsView *ui;
-    TransactionDialog *transactionDialog;
+    AddTransactionDialog *dialog;
 };
 
 #endif // TRANSACTIONSVIEW_H

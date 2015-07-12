@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "TransactionDialog.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -44,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
     categoriesModel->select();
 
     categoriesView = new CategoriesView(categoriesModel, centralArea);
-    connect(categoriesView, SIGNAL(acceptedSignal()), this, SLOT(addCategoryToDatabase()));
+    connect(categoriesView, SIGNAL(acceptedSignal(QString)), this, SLOT(addCategoryToDatabase(QString)));
     centralArea->addWidget(categoriesView);
 
     transactionsModel = new QSqlRelationalTableModel(this, db);
@@ -106,7 +105,11 @@ void MainWindow::on_actionViewCategories_triggered()
     //resizeEvent(nullptr);
 }
 
-void MainWindow::addCategoryToDatabase()
+void MainWindow::addCategoryToDatabase(QString name)
 {
-
+    int id = categoriesModel->rowCount();
+    categoriesModel->insertRow(id);
+    categoriesModel->setData(categoriesModel->index(id, 0), id);
+    categoriesModel->setData(categoriesModel->index(id, 1), name);
+    categoriesModel->submitAll();
 }

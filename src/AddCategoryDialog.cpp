@@ -1,23 +1,34 @@
 #include "AddCategoryDialog.h"
-#include "ui_AddCategoryDialog.h"
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QLineEdit>
 
 AddCategoryDialog::AddCategoryDialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::AddCategoryDialog)
+    AddDialog(parent), nameLineEdit(nullptr)
 {
-    ui->setupUi(this);
-    setWindowTitle("MyFinance");
-    connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(acceptedSlot())); //clicked OK
-    connect(ui->buttonBox, SIGNAL(rejected()), this, SLOT(close())); //clicked CANCEL
+    QVBoxLayout *labelsLayout = new QVBoxLayout;
+    labelsLayout->addWidget(new QLabel(tr("Name")));
+
+    QVBoxLayout *lineEditsLayout = new QVBoxLayout;
+    nameLineEdit = new QLineEdit;
+    lineEditsLayout->addWidget(nameLineEdit);
+
+    QHBoxLayout *horizontalLayout = new QHBoxLayout;
+    horizontalLayout->addLayout(labelsLayout);
+    horizontalLayout->addLayout(lineEditsLayout);
+
+    QVBoxLayout *verticalLayout = dynamic_cast<QVBoxLayout *>(layout());
+    verticalLayout->insertLayout(0, horizontalLayout);
+
+    connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(accepted()));
 }
 
 AddCategoryDialog::~AddCategoryDialog()
 {
-    delete ui;
 }
 
-void AddCategoryDialog::acceptedSlot()
+void AddCategoryDialog::accepted()
 {
-    emit acceptedSignal();
-    close();
+    emit acceptedSignal(nameLineEdit->text());
 }
