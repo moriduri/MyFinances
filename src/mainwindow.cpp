@@ -43,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
     categoriesModel->select();
 
     categoriesView = new CategoriesView(categoriesModel, centralArea);
-    connect(categoriesView, SIGNAL(acceptedSignal()), this, SLOT(addCategoryToDatabase()));
+    connect(categoriesView, SIGNAL(acceptedSignal(QString)), this, SLOT(addCategoryToDatabase(QString)));
     centralArea->addWidget(categoriesView);
 
     transactionsModel = new QSqlRelationalTableModel(this, db);
@@ -105,7 +105,9 @@ void MainWindow::on_actionViewCategories_triggered()
     //resizeEvent(nullptr);
 }
 
-void MainWindow::addCategoryToDatabase()
+void MainWindow::addCategoryToDatabase(QString Name)
 {
-
+    QSqlQuery query(db);
+    if (!query.exec(QString("INSERT INTO categories (name) VALUES (\"%1\")").arg(Name)))
+        qFatal("Cannot insert data in the categories table");
 }

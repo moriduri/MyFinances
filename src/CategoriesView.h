@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QtSql>
+#include <QString>
 #include "Dialog.h"
 
 namespace Ui {
@@ -18,12 +19,12 @@ public:
     ~CategoriesView();
 
 signals:
-    void acceptedSignal();
+    void acceptedSignal(QString);
 
 private slots:
     void on_buttonAddCategory_clicked();
+    void acceptedSlot(QString);
 
-    void acceptedSlot();
 private:
     Ui::CategoriesView *ui;
     Dialog *dialog;
