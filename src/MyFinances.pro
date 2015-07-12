@@ -17,22 +17,19 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     Transaction.cpp \
-    TransactionDialog.cpp \
     Category.cpp \
     TransactionsView.cpp \
     CategoriesView.cpp \
-    AddCategoryDialog.cpp
+    Dialog.cpp
 
 HEADERS  += mainwindow.h \
     Transaction.h \
-    TransactionDialog.h \
     Category.h \
     TransactionsView.h \
     CategoriesView.h \
-    AddCategoryDialog.h
+    Dialog.h
 
 FORMS    += mainwindow.ui \
-    TransactionDialog.ui \
     TransactionsView.ui \
     CategoriesView.ui \
-    AddCategoryDialog.ui
+    Dialog.ui
