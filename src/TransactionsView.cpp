@@ -1,6 +1,5 @@
 #include "TransactionsView.h"
 #include "ui_TransactionsView.h"
-#include "TransactionDialog.h"
 
 TransactionsView::TransactionsView(QSqlRelationalTableModel *model, QWidget *parent) :
     QWidget(parent),
@@ -13,9 +12,9 @@ TransactionsView::TransactionsView(QSqlRelationalTableModel *model, QWidget *par
     ui->tableView->verticalHeader()->hide();
     ui->tableView->setItemDelegate(new QSqlRelationalDelegate(ui->tableView));
 
-    transactionDialog = new TransactionDialog(this);
+    dialog = new Dialog(Dialog::Transaction);
 
-    connect(transactionDialog, SIGNAL(acceptedSignal()), this, SLOT(acceptedSlot()));
+    connect(dialog, SIGNAL(acceptedSignal()), this, SLOT(acceptedSlot()));
 }
 
 TransactionsView::~TransactionsView()
@@ -25,7 +24,7 @@ TransactionsView::~TransactionsView()
 
 void TransactionsView::on_buttonAddTransaction_clicked()
 {
-    transactionDialog->exec();
+    dialog->exec();
 }
 
 void TransactionsView::acceptedSlot()

@@ -1,3 +1,2 @@
-1. Create base Dialog class for AddCategory and AddTransaction classes since they are very similar and even share the same interface
-2. Add parent category to the category class (also make out a way to get this from dialog, should be combolist for now but will be a special SelectCategory widget whcih will be also used in Transaction class)
-3. Link adding with actual saving to the database.
+1. Add parent category to the category class (also make out a way to get this from dialog, should be combolist for now but will be a special SelectCategory widget whcih will be also used in Transaction class)
+2. Link adding with actual saving to the database.

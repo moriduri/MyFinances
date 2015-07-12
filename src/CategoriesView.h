@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QtSql>
-#include "AddCategoryDialog.h"
+#include "Dialog.h"
 
 namespace Ui {
 class CategoriesView;
@@ -26,7 +26,7 @@ private slots:
     void acceptedSlot();
 private:
     Ui::CategoriesView *ui;
-    AddCategoryDialog *categoryDialog;
+    Dialog *dialog;
 };
 
 #endif // CATEGORIESVIEW_H

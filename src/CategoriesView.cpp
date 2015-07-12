@@ -11,9 +11,9 @@ CategoriesView::CategoriesView(QSqlTableModel *model, QWidget *parent) :
     ui->tableView->hideColumn(0);
     ui->tableView->verticalHeader()->hide(); //hides the left vertical header
 
-    categoryDialog = new AddCategoryDialog(this);
+    dialog = new Dialog(Dialog::Category);
 
-    connect(categoryDialog, SIGNAL(acceptedSignal()), this, SLOT(acceptedSlot()));
+    connect(dialog, SIGNAL(acceptedSignal()), this, SLOT(acceptedSlot()));
 }
 
 CategoriesView::~CategoriesView()
@@ -23,7 +23,7 @@ CategoriesView::~CategoriesView()
 
 void CategoriesView::on_buttonAddCategory_clicked()
 {
-    categoryDialog->exec();
+    dialog->exec();
 }
 
 void CategoriesView::acceptedSlot()
