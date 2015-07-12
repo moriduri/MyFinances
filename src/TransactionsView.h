@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QtSql>
-#include "Dialog.h"
+#include "AddTransactionDialog.h"
 
 namespace Ui {
     class TransactionsView;
@@ -26,7 +26,7 @@ private slots:
 
 private:
     Ui::TransactionsView *ui;
-    Dialog *dialog;
+    AddTransactionDialog *dialog;
 };
 
 #endif // TRANSACTIONSVIEW_H

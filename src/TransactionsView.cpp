@@ -12,7 +12,7 @@ TransactionsView::TransactionsView(QSqlRelationalTableModel *model, QWidget *par
     ui->tableView->verticalHeader()->hide();
     ui->tableView->setItemDelegate(new QSqlRelationalDelegate(ui->tableView));
 
-    dialog = new Dialog(Dialog::Transaction);
+    dialog = new AddTransactionDialog(this);
 
     connect(dialog, SIGNAL(acceptedSignal()), this, SLOT(acceptedSlot()));
 }
