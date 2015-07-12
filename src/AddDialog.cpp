@@ -22,8 +22,8 @@ AddDialog::~AddDialog()
     delete ui;
 }
 
-void AddDialog::acceptedSlot()
+/*void AddDialog::acceptedSlot()
 {
     emit acceptedSignal();
     close();
-}
+}*/
