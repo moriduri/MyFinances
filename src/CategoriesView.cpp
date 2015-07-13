@@ -13,7 +13,7 @@ CategoriesView::CategoriesView(QSqlTableModel *model, QWidget *parent) :
 
     dialog = new AddCategoryDialog(this);
 
-    connect(dialog, SIGNAL(acceptedSignal(QString)), this, SLOT(acceptedSlot(QString)));
+    connect(dialog, SIGNAL(acceptedSignal(QString)), SIGNAL(acceptedSignal(QString)));
 }
 
 CategoriesView::~CategoriesView()
@@ -24,9 +24,4 @@ CategoriesView::~CategoriesView()
 void CategoriesView::on_buttonAddCategory_clicked()
 {
     dialog->exec();
-}
-
-void CategoriesView::acceptedSlot(QString name)
-{
-    emit acceptedSignal(name);
 }

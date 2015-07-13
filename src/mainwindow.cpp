@@ -43,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
     categoriesModel->select();
 
     categoriesView = new CategoriesView(categoriesModel, centralArea);
-    connect(categoriesView, SIGNAL(acceptedSignal(QString)), this, SLOT(addCategoryToDatabase(QString)));
+    connect(categoriesView, SIGNAL(acceptedSignal(QString)), SLOT(addCategoryToDatabase(QString)));
     centralArea->addWidget(categoriesView);
 
     transactionsModel = new QSqlRelationalTableModel(this, db);
@@ -58,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // This actually will evolve in a much prettier view
     transactionsView = new TransactionsView(transactionsModel, centralArea);
-    connect(transactionsView, SIGNAL(acceptedSignal()), this, SLOT(addTransactionToDatabase()));
+    connect(transactionsView, SIGNAL(acceptedSignal()), SLOT(addTransactionToDatabase()));
     centralArea->addWidget(transactionsView);
     centralArea->setCurrentWidget(transactionsView);
 }
