@@ -1,4 +1,7 @@
 1. Add parent category to the category class (also make out a way to get this from dialog, should be combolist for now but will be a special SelectCategory widget whcih will be also used in Transaction class)
-2. Link adding with actual saving to the database.
+2. Save transactions to database.
 3. Link signals directly in adding. Now we have this: SIGNAL ButtonBox.accepted() -> SLOT CategoryDialog.accepted() -> SIGNAL CategoryDialog.accepted(QString) -> SLOT CategoriesView.accepted(QString) -> SIGNAL CategoriesView.accepted(QString) -> SLOT MainWindow.AddCategoryToDatabase(QString).
 	We can connect signals without intermediate slots instead
+4. Create widgets on forms for AddCategory and AddTransactions.
+	We can add these widgets to the ui of the parent class.
+	This approach allows using Qt Designer for designing these forms which is a more convenient way of creating UI than direct Widget manipulation in code.
