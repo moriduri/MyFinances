@@ -3,6 +3,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QPushButton>
 
 AddCategoryDialog::AddCategoryDialog(QWidget *parent) :
     AddDialog(parent), nameLineEdit(nullptr)
@@ -22,6 +23,9 @@ AddCategoryDialog::AddCategoryDialog(QWidget *parent) :
     verticalLayout->insertLayout(0, horizontalLayout);
 
     connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(accepted()));
+
+    ui->buttonBox->button(QDialogButtonBox::Save)->setEnabled(false);
+    connect(nameLineEdit, SIGNAL(textChanged(QString)), this, SLOT(onTextChanged(QString)));
 }
 
 AddCategoryDialog::~AddCategoryDialog()
@@ -31,4 +35,9 @@ AddCategoryDialog::~AddCategoryDialog()
 void AddCategoryDialog::accepted()
 {
     emit acceptedSignal(nameLineEdit->text());
+}
+
+void AddCategoryDialog::onTextChanged(QString Text)
+{
+    ui->buttonBox->button(QDialogButtonBox::Save)->setEnabled(Text.compare("") ? true : false);
 }

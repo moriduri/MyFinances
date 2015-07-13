@@ -16,6 +16,7 @@ signals:
 
 private slots:
     void accepted();
+    void onTextChanged(QString Text);
 
 private:
     QLineEdit *nameLineEdit;

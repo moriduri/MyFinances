@@ -5,6 +5,7 @@
 #include <QtSql>
 #include <QStackedWidget>
 #include <QTableView>
+#include <QString>
 #include "CategoriesView.h"
 #include "TransactionsView.h"
 

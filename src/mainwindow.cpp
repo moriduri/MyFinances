@@ -105,6 +105,7 @@ void MainWindow::on_actionViewCategories_triggered()
     //resizeEvent(nullptr);
 }
 
+
 void MainWindow::addCategoryToDatabase(QString name)
 {
     int id = categoriesModel->rowCount();

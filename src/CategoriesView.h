@@ -22,8 +22,8 @@ signals:
 
 private slots:
     void on_buttonAddCategory_clicked();
-
     void acceptedSlot(QString);
+
 private:
     Ui::CategoriesView *ui;
     AddCategoryDialog *dialog;

@@ -5,12 +5,15 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QDateEdit>
+#include <QMessageBox>
+#include <QPushButton>
 
 AddTransactionDialog::AddTransactionDialog(QWidget *parent) : AddDialog(parent)
 {
     QVBoxLayout *labelsLayout = new QVBoxLayout, *lineEditsLayout = new QVBoxLayout;
 
     QComboBox *comboBox = new QComboBox;
+    //while (query.next()) comboBox->addItem(query.value(0).toString()); //add categories to comboBox
     labelsLayout->addWidget(new QLabel(tr("Category")));
     lineEditsLayout->addWidget(comboBox);
 
@@ -32,7 +35,7 @@ AddTransactionDialog::AddTransactionDialog(QWidget *parent) : AddDialog(parent)
     horizontalLayout->addLayout(lineEditsLayout);
 
     QVBoxLayout *verticalLayout = dynamic_cast<QVBoxLayout *>(layout());
-    verticalLayout->insertLayout(0, horizontalLayout);
+    verticalLayout->insertLayout(0, horizontalLayout);    
 }
 
 
