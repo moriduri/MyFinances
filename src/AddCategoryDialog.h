@@ -12,11 +12,11 @@ public:
     ~AddCategoryDialog();
 
 signals:
-    acceptedSignal(QString);
+    void acceptedSignal(QString);
 
 private slots:
     void accepted();
-    void onTextChanged(QString Text);
+    void onTextChanged(QString);
 
 private:
     QLineEdit *nameLineEdit;

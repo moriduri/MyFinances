@@ -10,7 +10,7 @@
 #include "TransactionsView.h"
 
 namespace Ui {
-class MainWindow;
+    class MainWindow;
 }
 
 class MainWindow : public QMainWindow
@@ -28,7 +28,7 @@ private slots:
     void addTransactionToDatabase();
 
     void on_actionViewCategories_triggered();
-    void addCategoryToDatabase(QString name);
+    void addCategoryToDatabase(QString);
 
 protected:
     //  I don't think we need to care about things like resizing
